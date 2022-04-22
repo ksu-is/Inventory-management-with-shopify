@@ -7,18 +7,33 @@
 - [x] Find relative repositories for project idea
 - [x] Run the code from relative repositories
 
-# Project Road Map: Sprint 2 (Update(4/21/16))
+# Project Road Map: Sprint 2 (Update(4/21/22))
 
 ## Tasks
-- [] Develop the beginning frame work for the Inventory
-- [] First, Develop a main Inventory interface
-- [] Second, Develop other sub inventory interfaces for categories
-- [] Third, Develop a database and connect it to the inventory interface
-- [] Last, Test all code together
+- [X] Develop the beginning frame work for the Inventory
+- [] First, Develop a main Inventory interface*
+- [x] Second, Develop sub table to main "item" table for categories
+- [/] Third, Develop a database inventory interface*
+- [] Last, Test all code together *
+
+## New Problems
+- [] Not familiar with Tkinter library *
+- []
 
 # Project Road Map: Sprint 3 (Update)
-
+- [] Connect Rest API to the database using JSON and python
+- [] Continuing testing the App's windows
+- [] Continuing functionality testing for all buttons that have commands
 ## Tasks
-- [] First, Figure out to shopify api connection with database
-- [] Second, --
-- [] Third, --
+- [x] First, Figure out to shopify api connection with database
+- [/] Second, Familiarize myself with Tkinter library further
+- [] Third, 
+
+## Notes
+- Anything with "* " is a note
+- 
+- By looking through the orginal project that I'm basing my app off of, I have become more verse in the Tkinter syntax. 
+  The syntax becomes easier to read and have able to launch a few test windows that I'm working currently. (* Not familiar with Tkinter library * )
+
+- Because my lack of knowledge of the Tkinter syntax, I fell behind my goal of having it completed by 4/21/22 (* Last, Test all code together | First, Develop a main
+  Inventory interface * )
