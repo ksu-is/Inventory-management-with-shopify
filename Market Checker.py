@@ -18,7 +18,7 @@ class Market:
         self.marketw.geometry("%dx%d+%d+%d" % (width, height, x, y))
         self.marketw.title("Inventory")
         self.marketw.resizable(0,0)
-        self.marketquery = Button(self.marketw,text="Press for Market Query", command=self.MarketGrab)
+        self.marketquery = Button(self.marketw,text="Press for Market Query", command=self.MarketCheckBox)
         self.marketquery.place(x=100,y=200)
         self.marketw.mainloop()
         
@@ -42,11 +42,25 @@ class Market:
         
 
 
-    """def MarketCheckBox(self):
-        self.checkbrook = Checkbutton()
-        self.checkpeacht =
-        self.checkten =
-        self.check ="""
+    def MarketCheckBox(self):
+        self.checkboxframe = LabelFrame(self.marketw,height=600,width=600, text= "Check Box For Market Selcetion To Be Queried ")
+        self.checkboxframe.place(x=10,y=10)
+        self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market", width=20)
+        self.checkbrook.place(x=10, y=10)
+        self.checkpeacht = Checkbutton (self.checkboxframe, text= "Peachtree City Farmer's Market", width=20)
+        self.checkpeacht.place(x=10, y=30)
+        self.checkten = Checkbutton (self.checkboxframe, text= "Chattanooga Farmer's Market", width=20)
+        self.checkten.place(x=10, y=50)
+        self.checksuwanee = Checkbutton (self.checkboxframe, text= "Suwanee Farmer's Market", width=20)
+        self.checksuwanee.place(x=10, y=70)
+        self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market", width=20)
+        self.checkbrook.place(x=210, y=10)
+        self.checkpeacht = Checkbutton (self.checkboxframe, text= "Peachtree City Farmer's Market", width=20)
+        self.checkpeacht.place(x=210, y=30)
+        self.checkten = Checkbutton (self.checkboxframe, text= "Chattanooga Farmer's Market", width=20)
+        self.checkten.place(x=210, y=50)
+        self.checksuwanee = Checkbutton (self.checkboxframe, text= "Suwanee Farmer's Market", width=20)
+        self.checksuwanee.place(x=210, y=70)
 
 w=Market()
 w.base.commit()
