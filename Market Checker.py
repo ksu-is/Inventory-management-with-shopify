@@ -1,6 +1,6 @@
 
 from tkinter import ttk
-
+from tkinter import messagebox
 from tkinter import *
 import sqlite3
 import os.path
@@ -28,14 +28,16 @@ class Market:
         self.bottomframe.place(x=0,y=660)
         self.marketquery = Button(self.bottomframe,text="Press for Market Query", command=self.MarketCheckBox, bg="#F47F20", relief="flat")
         self.marketquery.place(x=0,y=0)
-        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
-        self.additem.place(x=9, y=360)
-        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
-        self.additem.place(x=119, y=360)
-        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
-        self.additem.place(x=229, y=360)
-        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
-        self.additem.place(x=339, y=360)
+        self.additem = Button(self.marketw, text = "Add/Remove Item", height=9, width=8, wraplength=80,)
+        self.additem.place(x=9, y=460)
+        self.additem = Button(self.marketw, text = "Update Inventory Item", height=9, width=8,wraplength=80,)
+        self.additem.place(x=134, y=460)
+        self.additem = Button(self.marketw, text = "Update Shopify", height=9, width=8,wraplength=80) 
+        self.additem.place(x=259, y=460)
+        self.additem = Button(self.marketw, text = "Retrieve From Shopify", height=9, width=8,wraplength=80,)
+        self.additem.place(x=382, y=460)
+        self.additem = Button(self.marketw, text = "Exit", height=9, width=8,wraplength=80,command=self.__Main_del__)
+        self.additem.place(x=504, y=460)
         
         
         self.Display()
@@ -65,7 +67,7 @@ class Market:
 
     def MarketCheckBox(self):
         self.varbrook = tkinter.IntVar(value=1)
-        self.checkboxframe = LabelFrame(self.marketw,height=200,width=600, text= "Check Box For Market Selcetion To Be Queried ")
+        self.checkboxframe = LabelFrame(self.marketw,height=230,width=600, text= "Check Box For Market Selcetion To Be Queried ")
         self.checkboxframe.place(x=10,y=140)
         self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market",variable=self.varbrook, onvalue=0, offvalue=1 )
         self.checkbrook.place(x=10, y=10)
@@ -76,13 +78,23 @@ class Market:
         self.checksuwanee = Checkbutton (self.checkboxframe, text= "Suwanee Farmer's Market", )
         self.checksuwanee.place(x=10, y=70)
         self.checksmalle = Checkbutton (self.checkboxframe, text= "Alpharetta Farmer's Market", )
-        self.checksmalle.place(x=210, y=10)
+        self.checksmalle.place(x=230, y=10)
         self.checkmediume = Checkbutton (self.checkboxframe, text= "Small Event", )
-        self.checkmediume.place(x=210, y=30)
+        self.checkmediume.place(x=230, y=30)
         self.checkbige = Checkbutton (self.checkboxframe, text= "Medium Event", )
-        self.checkbige.place(x=210, y=50)
+        self.checkbige.place(x=230, y=50)
         self.checksuwanee = Checkbutton (self.checkboxframe, text= "Big Event",)
-        self.checksuwanee.place(x=210, y=70)
+        self.checksuwanee.place(x=230, y=70)
+        self.totalframe = LabelFrame(self.checkboxframe, height=100,width=574,text="Total",relief='ridge')
+        self.totalframe.place(x=10,y=90)
+    
+    def __Main_del__(self):
+        if messagebox.askyesno("Quit", " Leave Inventory?") == True:
+            self.marketw.quit()
+            exit(0)
+        else:
+            pass
+        
         
     
     #def CheckBoxVal(self):
@@ -97,8 +109,8 @@ class Market:
         self.longframe.place(x=620,y=140)
         self.totalframebacker = LabelFrame(self.marketw, height=100,width=600,bg="#F47F20",)
         self.totalframebacker.place(x=620,y=670)
-        self.totalframe = LabelFrame(self.marketw, height=100,width=600,text="Total",bg="white",relief='flat')
-        self.totalframe.place(x=620,y=670)
+        '''self.totalframe = LabelFrame(self.checkboxframe, height=100,width=600,text="Total",bg="white",relief='flat')
+        self.totalframe.place(x=620,y=670)'''
         
 
     #Market total dictionaries
@@ -152,8 +164,11 @@ class Market:
 
     #print(total)
 
-    def test_window_over(self):
-        self.brooktotal = Frame
+    #def showdata(self):
+
+    #def addindata(self):
+
+        
 
 
 w=Market()
