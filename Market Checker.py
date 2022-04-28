@@ -53,12 +53,12 @@ class Market:
         
         self.cur = self.base.cursor()
         
-        self.cur.execute("SELECT * From 'Wild Pack' where ItemQty ")
+        self.cur.execute("SELECT * FROM Items ")
         self.runner = self.cur.fetchall()
         i=0
         for inventory in self.runner:
             for j in range(len(inventory)):
-                e = Entry(self.marketw,width=30,fg='#7B3F00',bg='#FCD667')
+                e = Entry(self.longframe,width=13,fg='#7B3F00',bg='#FCD667')
                 e.grid(row=5,column=j)
                 e.insert(END,inventory[j])
             i+=1
@@ -109,8 +109,8 @@ class Market:
         self.longframe.place(x=620,y=140)
         self.totalframebacker = LabelFrame(self.marketw, height=100,width=600,bg="#F47F20",)
         self.totalframebacker.place(x=620,y=670)
-        '''self.totalframe = LabelFrame(self.checkboxframe, height=100,width=600,text="Total",bg="white",relief='flat')
-        self.totalframe.place(x=620,y=670)'''
+        self.MarketGrab()
+        
         
 
     #Market total dictionaries
