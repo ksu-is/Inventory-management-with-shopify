@@ -22,16 +22,26 @@ class Market:
         self.marketw.geometry("%dx%d+%d+%d" % (width, height, x, y))
         self.marketw.title("Inventory")
         self.marketw.resizable(0,0)
-        self.marketquery = Button(self.marketw,text="Press for Market Query", command=self.MarketCheckBox)
-        self.marketquery.place(x=100,y=200)
         self.topframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
         self.topframe.place(x=0,y=0)
         self.bottomframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
         self.bottomframe.place(x=0,y=660)
+        self.marketquery = Button(self.bottomframe,text="Press for Market Query", command=self.MarketCheckBox, bg="#F47F20", relief="flat")
+        self.marketquery.place(x=0,y=0)
+        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
+        self.additem.place(x=9, y=360)
+        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
+        self.additem.place(x=119, y=360)
+        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
+        self.additem.place(x=229, y=360)
+        self.additem = Button(self.marketw, text = "Add Item", height=9, width=8)
+        self.additem.place(x=339, y=360)
+        
         
         self.Display()
         self.MarketCheckBox()
         self.marketw.mainloop()
+
         
     def MarketGrab(self):
         path = os.path.dirname(os.path.abspath(__file__))
