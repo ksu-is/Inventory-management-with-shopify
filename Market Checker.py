@@ -1,10 +1,12 @@
 
 from tkinter import ttk
+
 from tkinter import *
 import sqlite3
 import os.path
+import tkinter
 
-test_word = 13
+
 class Market:
     
     
@@ -22,7 +24,13 @@ class Market:
         self.marketw.resizable(0,0)
         self.marketquery = Button(self.marketw,text="Press for Market Query", command=self.MarketCheckBox)
         self.marketquery.place(x=100,y=200)
+        self.topframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
+        self.topframe.place(x=0,y=0)
+        self.bottomframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
+        self.bottomframe.place(x=0,y=660)
+        
         self.Display()
+        self.MarketCheckBox()
         self.marketw.mainloop()
         
     def MarketGrab(self):
@@ -46,9 +54,10 @@ class Market:
 
 
     def MarketCheckBox(self):
+        self.varbrook = tkinter.IntVar(value=1)
         self.checkboxframe = LabelFrame(self.marketw,height=200,width=600, text= "Check Box For Market Selcetion To Be Queried ")
-        self.checkboxframe.place(x=10,y=35)
-        self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market", height=2 )
+        self.checkboxframe.place(x=10,y=140)
+        self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market",variable=self.varbrook, onvalue=0, offvalue=1 )
         self.checkbrook.place(x=10, y=10)
         self.checkpeacht = Checkbutton (self.checkboxframe, text= "Peachtree City Farmer's Market", )
         self.checkpeacht.place(x=10, y=30)
@@ -56,23 +65,86 @@ class Market:
         self.checkten.place(x=10, y=50)
         self.checksuwanee = Checkbutton (self.checkboxframe, text= "Suwanee Farmer's Market", )
         self.checksuwanee.place(x=10, y=70)
-        self.checksmalle = Checkbutton (self.checkboxframe, text= "Small Event", )
+        self.checksmalle = Checkbutton (self.checkboxframe, text= "Alpharetta Farmer's Market", )
         self.checksmalle.place(x=210, y=10)
-        self.checkmediume = Checkbutton (self.checkboxframe, text= "Medium Event", )
+        self.checkmediume = Checkbutton (self.checkboxframe, text= "Small Event", )
         self.checkmediume.place(x=210, y=30)
         self.checkbige = Checkbutton (self.checkboxframe, text= "Medium Event", )
         self.checkbige.place(x=210, y=50)
-        self.checksuwanee = Checkbutton (self.checkboxframe, text= f"Suwanee{test_word} Farmer's Market",)
+        self.checksuwanee = Checkbutton (self.checkboxframe, text= "Big Event",)
         self.checksuwanee.place(x=210, y=70)
+        
     
+    #def CheckBoxVal(self):
+        
+
+
     def MarketSum(self):
         pass
 
     def Display(self):
-        self.longframe = LabelFrame(self.marketw, height=550,width=600,text="Total Amounts For Selected Markets")
-        self.longframe.place(x=700,y=35)
-        self.totalframe = LabelFrame(self.marketw, height=100,width=600,text="Total",bg="white")
-        self.totalframe.place(x=700,y=630)
+        self.longframe = LabelFrame(self.marketw, height=492,width=770,text="Total Amounts For Selected Markets")
+        self.longframe.place(x=620,y=140)
+        self.totalframebacker = LabelFrame(self.marketw, height=100,width=600,bg="#F47F20",)
+        self.totalframebacker.place(x=620,y=670)
+        self.totalframe = LabelFrame(self.marketw, height=100,width=600,text="Total",bg="white",relief='flat')
+        self.totalframe.place(x=620,y=670)
+        
+
+    #Market total dictionaries
+    class_pack_amnts = {"brookhaven":7, 
+                        "peachtree":8, 
+                        "chatta":25, 
+                        "suwanee":7, 
+                        "small":7, 
+                        "medium":14, 
+                        "big":25, 
+                        "alpha":8
+    }
+
+    wild_pack_amnts = {"brookhaven":7, 
+                        "peachtree":8, 
+                        "chatta":25, 
+                        "suwanee":7, 
+                        "small":7, 
+                        "medium":14, 
+                        "big":25, 
+                        "alpha":8
+    }
+    
+
+    flavor_pack_amnts = {"brookhaven":7, 
+                        "peachtree":8, 
+                        "chatta":25, 
+                        "suwanee":7, 
+                        "small":7, 
+                        "medium":14, 
+                        "big":25, 
+                        "alpha":8
+    }
+
+    season_pack_amnts = {"brookhaven":7, 
+                        "peachtree":8, 
+                        "chatta":25, 
+                        "suwanee":7, 
+                        "small":7, 
+                        "medium":14, 
+                        "big":25, 
+                        "alpha":8
+    }
+
+
+    #print(test_dict["test_flavor_1"])
+    #total = 0
+    #for values in test_dict.values():
+        #total = total + values
+        
+
+    #print(total)
+
+    def test_window_over(self):
+        self.brooktotal = Frame
+
 
 w=Market()
 
