@@ -60,15 +60,19 @@ class Market:
         self.tree_scroll.pack(side=RIGHT,fill=Y)
         self.my_tree = ttk.Treeview(self.tree_frame,yscrollcommand=self.tree_scroll.set,selectmode='extended')
         #self.my_tree.pack()
+
+        
+
+        #Columns and headings for the database table
         self.tree_scroll.config(command=self.my_tree.yview)
         self.my_tree['columns'] = ("Item ID", "Item Name", "Unit Price", "Item Type","Item Quantity", "Sale Type")
         self.my_tree.column("#0",width=0,stretch=NO)
-        self.my_tree.column("Item ID",width=100,anchor=CENTER)
-        self.my_tree.column("Item Name",width=100,anchor=CENTER)
-        self.my_tree.column("Unit Price",width=100,anchor=CENTER)
-        self.my_tree.column("Item Type",width=100,anchor=CENTER)
-        self.my_tree.column("Item Quantity",width=100,anchor=CENTER)
-        self.my_tree.column("Sale Type",width=100,anchor=CENTER)
+        self.my_tree.column("Item ID",width=125,anchor=CENTER)
+        self.my_tree.column("Item Name",width=125,anchor=CENTER)
+        self.my_tree.column("Unit Price",width=125,anchor=CENTER)
+        self.my_tree.column("Item Type",width=125,anchor=CENTER)
+        self.my_tree.column("Item Quantity",width=125,anchor=CENTER)
+        self.my_tree.column("Sale Type",width=125,anchor=CENTER)
 
         self.my_tree.heading("#0",text="",anchor=W)
         self.my_tree.heading("Item ID",text="Item ID",anchor=CENTER)
@@ -81,7 +85,7 @@ class Market:
         self.my_tree.tag_configure('oddrow',background='white')
         self.my_tree.tag_configure('evenrow',background='lightblue')
         self.my_tree.pack()
-        self.data_frame = LabelFrame(self.marketw, text="test1",height=100,width=200)
+        self.data_frame = LabelFrame(self.marketw, text="test1",height=100,width=300)
         self.data_frame.place(x=620,y=652)
 
         ID_label = Label(self.data_frame, text= "Item ID")
@@ -129,10 +133,16 @@ class Market:
         self.tester = self.cur.execute("SELECT * FROM Items")
         self.runner = self.cur.fetchall()
 
-        i=0
+        '''i=0
         for ro in self.tester:
             self.my_tree.insert(parents='',index='end', text='', values=(ro[0],ro[1],ro[2],ro[3],ro[4],ro[5],ro[6]))
-            i = i + 1
+            i = i + 1'''
+        
+        global count
+        count = 0
+
+        for record in self.runner:
+            self.my_tree.insert('','end',values=(record))
         
         self.my_tree.pack()
 
