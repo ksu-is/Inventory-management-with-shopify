@@ -67,12 +67,12 @@ class Market:
         self.tree_scroll.config(command=self.my_tree.yview)
         self.my_tree['columns'] = ("Item ID", "Item Name", "Unit Price", "Item Type","Item Quantity", "Sale Type")
         self.my_tree.column("#0",width=0,stretch=NO)
-        self.my_tree.column("Item ID",width=125,anchor=CENTER)
-        self.my_tree.column("Item Name",width=125,anchor=CENTER)
-        self.my_tree.column("Unit Price",width=125,anchor=CENTER)
-        self.my_tree.column("Item Type",width=125,anchor=CENTER)
-        self.my_tree.column("Item Quantity",width=125,anchor=CENTER)
-        self.my_tree.column("Sale Type",width=125,anchor=CENTER)
+        self.my_tree.column("Item ID",width=60,anchor=CENTER)
+        self.my_tree.column("Item Name",width=175,anchor=CENTER)
+        self.my_tree.column("Unit Price",width=60,anchor=CENTER)
+        self.my_tree.column("Item Type",width=175,anchor=CENTER)
+        self.my_tree.column("Item Quantity",width=60,anchor=CENTER)
+        self.my_tree.column("Sale Type",width=175,anchor=CENTER)
 
         self.my_tree.heading("#0",text="",anchor=W)
         self.my_tree.heading("Item ID",text="Item ID",anchor=CENTER)
@@ -142,7 +142,11 @@ class Market:
         count = 0
 
         for record in self.runner:
-            self.my_tree.insert('','end',values=(record))
+            if count % 2==0:
+                self.my_tree.insert(parent='',index='end',iid=count,values=(record),tags=('oddrow', ))
+            else:
+                self.my_tree.insert(parent='',index='end',iid=count,values=(record),tags=('evenrow', ))
+            count+=1
         
         self.my_tree.pack()
 
