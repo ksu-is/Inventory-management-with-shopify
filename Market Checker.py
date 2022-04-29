@@ -26,7 +26,7 @@ class Market:
         y = (screen_height / 2) - (height / 2)
         self.marketw.geometry("%dx%d+%d+%d" % (width, height, x, y))
         self.marketw.title("Inventory")
-        self.marketw.resizable(0,0)
+        self.marketw.resizable(True,True)
         self.topframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
         self.topframe.place(x=0,y=0)
         self.bottomframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
@@ -54,25 +54,25 @@ class Market:
         self.style.map("Treeview",
                 background =[('selected','#FCD667')])
         
-        self.tree_frame = Frame(self.marketw)
+        self.tree_frame = LabelFrame(self.marketw,height=30,width=30)
         self.tree_frame.place(x=620,y=140)
         self.tree_scroll=Scrollbar(self.tree_frame)
         self.tree_scroll.pack(side=RIGHT,fill=Y)
-        self.my_tree = ttk.Treeview(self.tree_frame, yscrollcommand=self.tree_scroll.set,selectmode='extended')
-        self.my_tree.pack
+        self.my_tree = ttk.Treeview(self.tree_frame,yscrollcommand=self.tree_scroll.set,selectmode='extended')
+        #self.my_tree.pack()
         self.tree_scroll.config(command=self.my_tree.yview)
         self.my_tree['columns'] = ("Item ID", "Item Name", "Unit Price", "Item Type","Item Quantity", "Sale Type")
         self.my_tree.column("#0",width=0,stretch=NO)
-        self.my_tree.column("Item ID",width=50,anchor=W)
-        self.my_tree.column("Item Name",width=50,anchor=W)
-        self.my_tree.column("Unit Price",width=50,anchor=CENTER)
-        self.my_tree.column("Item Type",width=50,anchor=CENTER)
-        self.my_tree.column("Item Quantity",width=50,anchor=CENTER)
-        self.my_tree.column("Sale Type",width=50,anchor=CENTER)
+        self.my_tree.column("Item ID",width=100,anchor=CENTER)
+        self.my_tree.column("Item Name",width=100,anchor=CENTER)
+        self.my_tree.column("Unit Price",width=100,anchor=CENTER)
+        self.my_tree.column("Item Type",width=100,anchor=CENTER)
+        self.my_tree.column("Item Quantity",width=100,anchor=CENTER)
+        self.my_tree.column("Sale Type",width=100,anchor=CENTER)
 
         self.my_tree.heading("#0",text="",anchor=W)
-        self.my_tree.heading("Item ID",text="Item ID",anchor=W)
-        self.my_tree.heading("Item Name",text="Item Name",anchor=W)
+        self.my_tree.heading("Item ID",text="Item ID",anchor=CENTER)
+        self.my_tree.heading("Item Name",text="Item Name",anchor=CENTER)
         self.my_tree.heading("Unit Price",text="Unit Price",anchor=CENTER)
         self.my_tree.heading("Item Type",text="Item Type",anchor=CENTER)
         self.my_tree.heading("Item Quantity",text="Item Quantity",anchor=CENTER)
@@ -80,7 +80,7 @@ class Market:
 
         self.my_tree.tag_configure('oddrow',background='white')
         self.my_tree.tag_configure('evenrow',background='lightblue')
-
+        self.my_tree.pack()
         self.data_frame = LabelFrame(self.marketw, text="test1",height=100,width=200)
         self.data_frame.place(x=620,y=652)
 
@@ -126,18 +126,15 @@ class Market:
         db = os.path.join(path, "Items and products.db")
         self.base = sqlite3.connect(db)
         self.cur = self.base.cursor()
-        self.cur.execute("SELECT * FROM Items")
+        self.tester = self.cur.execute("SELECT * FROM Items")
         self.runner = self.cur.fetchall()
 
-        global count
-        count = 0
-
-        for inventory in self.runner:
-            if count % 2==0:
-                self.my_tree.insert(parent='',index='end',iid=count, text='', tag=('evenrow',))
-            else:
-                self.my_tree.insert(parent='',index='end',iid=count, text='', tag=('oddrow',))
-            count+=1
+        i=0
+        for ro in self.tester:
+            self.my_tree.insert(parents='',index='end', text='', values=(ro[0],ro[1],ro[2],ro[3],ro[4],ro[5],ro[6]))
+            i = i + 1
+        
+        self.my_tree.pack()
 
         self.base.commit()
         self.base.close()
