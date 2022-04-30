@@ -27,12 +27,15 @@ class Market:
         self.marketw.geometry("%dx%d+%d+%d" % (width, height, x, y))
         self.marketw.title("Inventory")
         self.marketw.resizable(True,True)
+        #Orange placer
         self.topframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
         self.topframe.place(x=0,y=0)
         self.bottomframe=LabelFrame(self.marketw,width=1400,height=120,bg="#F47F20")
         self.bottomframe.place(x=0,y=660)
         #self.marketquery = Button(self.bottomframe,text="Press for Market Query", command=self.MarketCheckBox, bg="#F47F20", relief="flat")
         #self.marketquery.place(x=0,y=0)
+
+        #Buttons under Market Box
         self.additem = Button(self.marketw, text = "Add/Remove Item", height=9, width=8, wraplength=80,)
         self.additem.place(x=9, y=460)
         self.additem = Button(self.marketw, text = "Update Inventory Item", height=9, width=8,wraplength=80,)
@@ -43,6 +46,9 @@ class Market:
         self.additem.place(x=382, y=460)
         self.additem = Button(self.marketw, text = "Exit", height=9, width=8,wraplength=80,command=self.__Main_del__)
         self.additem.place(x=504, y=460)
+        self.additem = Button(self.marketw, text = "Select Item", height=9, width=8,wraplength=80,command=self.select_record)
+        self.additem.place(x=450, y=460)  
+        #self.my_tree.bind("<ButtonRelease-1>",self.select_record) 
         #self.MarketGrab()
         self.style = ttk.Style()
         self.style.theme_use('default')
@@ -54,8 +60,8 @@ class Market:
         self.style.map("Treeview",
                 background =[('selected','#FCD667')])
         
-        self.tree_frame = LabelFrame(self.marketw,height=30,width=30)
-        self.tree_frame.place(x=620,y=140)
+        self.tree_frame = LabelFrame(self.marketw,height=200,width=30)
+        self.tree_frame.place(x=665,y=146)
         self.tree_scroll=Scrollbar(self.tree_frame)
         self.tree_scroll.pack(side=RIGHT,fill=Y)
         self.my_tree = ttk.Treeview(self.tree_frame,yscrollcommand=self.tree_scroll.set,selectmode='extended')
@@ -79,48 +85,45 @@ class Market:
         self.my_tree.heading("Item Name",text="Item Name",anchor=CENTER)
         self.my_tree.heading("Unit Price",text="Unit Price",anchor=CENTER)
         self.my_tree.heading("Item Type",text="Item Type",anchor=CENTER)
-        self.my_tree.heading("Item Quantity",text="Item Quantity",anchor=CENTER)
+        self.my_tree.heading("Item Quantity",text="Item Qty",anchor=CENTER)
         self.my_tree.heading("Sale Type",text="Sale Type",anchor=CENTER)
 
         self.my_tree.tag_configure('oddrow',background='white')
         self.my_tree.tag_configure('evenrow',background='lightblue')
         self.my_tree.pack()
-        self.data_frame = LabelFrame(self.marketw, text="test1",height=100,width=300)
-        self.data_frame.place(x=620,y=652)
+        self.data_frame = LabelFrame(self.marketw, text="Enter data",height=200)
+        self.data_frame.place(x=680,y=452)
 
-        ID_label = Label(self.data_frame, text= "Item ID")
-        ID_label.grid(row=0,column=0,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=0,column=1,padx=10,pady=10)
+        self.ID_label = Label(self.data_frame, text= "Item ID")
+        self.ID_label.grid(row=0,column=0,padx=10,pady=10)
+        self.ID_entry = Entry(self.data_frame)
+        self.ID_entry.grid(row=0,column=1,padx=10,pady=10)
 
-        ID_label = Label(self.data_frame, text= "Item Name")
-        ID_label.grid(row=0,column=2,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=0,column=3,padx=10,pady=10)
+        self.ItemName_label = Label(self.data_frame, text= "Item Name")
+        self.ItemName_label.grid(row=0,column=2,padx=10,pady=10)
+        self.ItemName_entry = Entry(self.data_frame)
+        self.ItemName_entry.grid(row=0,column=3,padx=10,pady=10)
 
-        ID_label = Label(self.data_frame, text= "Unit Price")
-        ID_label.grid(row=0,column=4,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=0,column=5,padx=10,pady=10) 
+        self.UnitPrice_label = Label(self.data_frame, text= "Unit Price")
+        self.UnitPrice_label.grid(row=0,column=4,padx=10,pady=10)
+        self.UnitPrice_entry = Entry(self.data_frame)
+        self.UnitPrice_entry.grid(row=0,column=5,padx=10,pady=10) 
 
-        ID_label = Label(self.data_frame, text= "Item Type")
-        ID_label.grid(row=1,column=0,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=1,column=1,padx=10,pady=10)
+        self.ItemType_label = Label(self.data_frame, text= "Item Type")
+        self.ItemType_label.grid(row=1,column=0,padx=10,pady=10)
+        self.ItemType_entry = Entry(self.data_frame)
+        self.ItemType_entry.grid(row=1,column=1,padx=10,pady=10)
 
-        ID_label = Label(self.data_frame, text= "Item Quantity")
-        ID_label.grid(row=1,column=2,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=1,column=3,padx=10,pady=10)
+        self.ItemQty_label = Label(self.data_frame, text= "Item Quantity")
+        self.ItemQty_label.grid(row=1,column=2,padx=10,pady=10)
+        self.ItemQty_entry = Entry(self.data_frame)
+        self.ItemQty_entry.grid(row=1,column=3,padx=10,pady=10)
 
-        ID_label = Label(self.data_frame, text= "Sale Type")
-        ID_label.grid(row=1,column=4,padx=10,pady=10)
-        ID_entry = Entry(self.data_frame)
-        ID_entry.grid(row=1,column=5,padx=10,pady=10) 
-
+        self.SaleType_label = Label(self.data_frame, text= "Sale Type")
+        self.SaleType_label.grid(row=1,column=4,padx=10,pady=10)
+        self.SaleType_entry = Entry(self.data_frame)
+        self.SaleType_entry.grid(row=1,column=5,padx=10,pady=10) 
         
-        
-        #self.Display()
         self.query_data()
         self.MarketCheckBox()
         self.marketw.mainloop()
@@ -149,33 +152,28 @@ class Market:
             count+=1
         
         self.my_tree.pack()
-
         self.base.commit()
         self.base.close()
-        
-    def MarketGrab(self):
-        
-        path = os.path.dirname(os.path.abspath(__file__))
-        db = os.path.join(path, "Items and products.db")
-        self.base = sqlite3.connect(db)
 
+    def select_record(self):
         
-        self.cur = self.base.cursor()
-        
-        self.cur.execute("SELECT * FROM Items ")
-        self.runner = self.cur.fetchall()
-        i=0
-        for inventory in self.runner:
-            for j in range(len(inventory)):
-                e = Entry(self.longframe,width=13,fg='#7B3F00',bg='#FCD667')
-                e.grid(row=5,column=j)
-                e.insert(END,inventory[j])
-            i+=1
-        
-        style=ttk.Style()
+        self.ID_entry.delete(0, END)
+        self.ItemName_entry.delete(0, END)
+        self.UnitPrice_entry.delete(0, END)
+        self.ItemType_entry.delete(0, END)
+        self.ItemQty_entry.delete(0, END)
+        self.SaleType_entry.delete(0, END)
 
-        
+        self.selected = self.my_tree.focus()
 
+        self.values = self.my_tree.item(self.selected, 'values')
+
+        self.ID_entry.insert(0, self.values[0])
+        self.ItemName_entry.insert(0, self.values[1])
+        self.UnitPrice_entry.insert(0, self.values[2])
+        self.ItemType_entry.insert(0, self.values[3])
+        self.ItemQty_entry.insert(0, self.values[4])
+        self.SaleType_entry.insert(0, self.values[5])
 
     def MarketCheckBox(self):
         self.varbrook = tkinter.IntVar(value=1)
@@ -215,14 +213,6 @@ class Market:
 
     def MarketSum(self):
         pass
-
-    def Display(self):
-        self.longframe = LabelFrame(self.marketw, height=492,width=770,text="Total Amounts For Selected Markets")
-        self.longframe.place(x=620,y=140)
-        self.totalframebacker = LabelFrame(self.marketw, height=100,width=600,bg="#F47F20",)
-        self.totalframebacker.place(x=620,y=670)
-        self.MarketGrab()
-        
         
 
     #Market total dictionaries
