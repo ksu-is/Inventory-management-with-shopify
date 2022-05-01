@@ -36,8 +36,6 @@ class Market:
         #self.marketquery.place(x=0,y=0)
 
         #Buttons under Market Box
-        self.additem = Button(self.marketw, text = "Add/Remove Item", height=9, width=8, wraplength=80,)
-        self.additem.place(x=9, y=460)
         self.additem = Button(self.marketw, text = "Update Inventory Item", height=9, width=8,wraplength=80,)
         self.additem.place(x=134, y=460)
         self.additem = Button(self.marketw, text = "Update Shopify", height=9, width=8,wraplength=80) 
@@ -46,9 +44,13 @@ class Market:
         self.additem.place(x=382, y=460)
         self.additem = Button(self.marketw, text = "Exit", height=9, width=8,wraplength=80,command=self.__Main_del__)
         self.additem.place(x=504, y=460)
-        self.additem = Button(self.marketw, text = "Select Item", height=9, width=8,wraplength=80,command=self.select_record)
-        self.additem.place(x=450, y=460)  
-        #self.my_tree.bind("<ButtonRelease-1>",self.select_record) 
+        self.additem = Button(self.marketw, text = "Select Item", height=2, width=10,wraplength=80,)
+        self.additem.place(x=665, y=600)
+        self.additem = Button(self.marketw, text = "Add Item", height=2, width=10, wraplength=80,)
+        self.additem.place(x=765, y=600)
+        self.additem = Button(self.marketw, text = "Remove Item", height=2, width=10, wraplength=80,command=self.remove_record)
+        self.additem.place(x=865, y=600)  
+        
         #self.MarketGrab()
         self.style = ttk.Style()
         self.style.theme_use('default')
@@ -87,6 +89,8 @@ class Market:
         self.my_tree.heading("Item Type",text="Item Type",anchor=CENTER)
         self.my_tree.heading("Item Quantity",text="Item Qty",anchor=CENTER)
         self.my_tree.heading("Sale Type",text="Sale Type",anchor=CENTER)
+
+        self.my_tree.bind("<ButtonRelease-1>",self.select_record) 
 
         self.my_tree.tag_configure('oddrow',background='white')
         self.my_tree.tag_configure('evenrow',background='lightblue')
@@ -155,7 +159,7 @@ class Market:
         self.base.commit()
         self.base.close()
 
-    def select_record(self):
+    def select_record(self,e):
         
         self.ID_entry.delete(0, END)
         self.ItemName_entry.delete(0, END)
@@ -175,9 +179,16 @@ class Market:
         self.ItemQty_entry.insert(0, self.values[4])
         self.SaleType_entry.insert(0, self.values[5])
 
+    def remove_record(self):
+        x = self.my_tree.selection()[0]
+        self.my_tree.delete(x)
+
+    def showtotal(self):
+        self.testlabel = Label(self.totalframe, text=self.varbrook.get()).pack()
+
     def MarketCheckBox(self):
         self.varbrook = tkinter.IntVar(value=1)
-        self.checkboxframe = LabelFrame(self.marketw,height=230,width=600, text= "Check Box For Market Selcetion To Be Queried ")
+        self.checkboxframe = LabelFrame(self.marketw,height=260,width=600, text= "Check Box For Market Selcetion To Be Queried ")
         self.checkboxframe.place(x=10,y=140)
         self.checkbrook = Checkbutton (self.checkboxframe, text= "Brookhaven Farmer's Market",variable=self.varbrook, onvalue=0, offvalue=1 )
         self.checkbrook.place(x=10, y=10)
@@ -195,8 +206,11 @@ class Market:
         self.checkbige.place(x=230, y=50)
         self.checksuwanee = Checkbutton (self.checkboxframe, text= "Big Event",)
         self.checksuwanee.place(x=230, y=70)
+        self.totalbutton = Button(self.checkboxframe,text="Calculate Total",command=self.showtotal)
+        self.totalbutton.place(x=10,y=200)
         self.totalframe = LabelFrame(self.checkboxframe, height=100,width=574,text="Total",relief='ridge')
         self.totalframe.place(x=10,y=90)
+
     
     def __Main_del__(self):
         if messagebox.askyesno("Quit", " Leave Inventory?") == True:
