@@ -11,9 +11,9 @@
 
 ## Tasks
 - [X] Develop the beginning frame work for the Inventory
-- [] First, Develop a main Inventory interface*
+- [x] First, Develop a main Inventory interface (4/29/2021)
 - [x] Second, Develop sub table to main "item" table for categories
-- [/] Third, Develop a database inventory interface*
+- [x] Third, Develop a database inventory interface (4/29/2021)
 - [] Last, Test all code together *
 
 ## New Problems
@@ -26,8 +26,9 @@
 - [] Continuing functionality testing for all buttons that have commands
 ## Tasks
 - [x] First, Figure out to shopify api connection with database
-- [/] Second, Familiarize myself with Tkinter library further
-- [] Third, 
+- [x] Second, Familiarize myself with Tkinter library further
+- [] Third, Add an "Add button" and "Update button" for the database interface
+- [] Forth, 
 
 ## Notes
 - Anything with "* " is a note
